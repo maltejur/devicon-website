@@ -24,6 +24,7 @@ const IconFrame = styled("div")({
   position: "relative",
   width: "200px",
   height: "200px",
+  float: "left",
 });
 
 const Checkerboard = styled("img")({
@@ -34,10 +35,10 @@ const Checkerboard = styled("img")({
 
 const Icon = styled("img")({
   position: "absolute",
-  top: "0",
-  left: "0",
-  right: "0",
-  bottom: "0",
-  width: "100%",
-  height: "100%",
+  top: "5%",
+  left: "5%",
+  right: "5%",
+  bottom: "5%",
+  width: "90%",
+  height: "90%",
 });

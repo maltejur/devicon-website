@@ -2980,6 +2980,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-colorful@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.5.1.tgz#29d9c4e496f2ca784dd2bb5053a3a4340cfaf784"
+  integrity sha512-M1TJH2X3RXEt12sWkpa6hLc/bbYS0H6F4rIqjQZ+RxNBstpY67d9TrFXtqdZwhpmBXcCwEi7stKqFue3ZRkiOg==
+
 react-devicons@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/react-devicons/-/react-devicons-2.14.0.tgz#718dc2f7261fd8bc6261a67fe1b242a309c6160f"

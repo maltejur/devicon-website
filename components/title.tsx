@@ -4,6 +4,7 @@ const Title = styled(Typography)({
   fontFamily: "'Damion', cursive",
   fontWeight: "400",
   color: "#60be86",
+  textAlign: "center",
 });
 
 export default Title;
