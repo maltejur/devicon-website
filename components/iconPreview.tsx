@@ -12,7 +12,7 @@ export default function IconPreview({
       <IconFrame>
         <Checkerboard src="/checkerboard.png" alt="Checkerboard" />
         <Icon
-          src={`/api/${iconName}/${iconVersion}`}
+          src={`/api/${iconName}/${iconVersion}.svg`}
           alt={`${iconName}/${iconVersion} icon`}
         />
       </IconFrame>

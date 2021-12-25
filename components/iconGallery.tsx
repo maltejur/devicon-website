@@ -28,7 +28,7 @@ export default function IconGallery() {
             }}
           >
             <img
-              src={`/api/${icon.name}/${icon.versions.svg[0]}`}
+              src={`/api/${icon.name}/${icon.versions.svg[0]}.svg`}
               alt={`${icon.name} ${icon.versions.svg[0]} icon`}
             />
             {icon.name}

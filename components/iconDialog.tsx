@@ -56,7 +56,7 @@ export default function IconDialog() {
                     window.location.host
                   }/api/${iconName}/${version}${
                     color ? `?color=${encodeURIComponent(color)}` : ""
-                  }`;
+                  }.svg`;
                   return (
                     <a href={url} key={version}>
                       {url}

@@ -14,17 +14,20 @@ export default async function Icon(req: NextApiRequest, res: NextApiResponse) {
     });
     return;
   }
-  if (!icon.versions.svg.find((version) => version === req.query.version)) {
+  const splitVersion = req.query.version.toString().split(".");
+  const format = splitVersion.length === 1 ? "svg" : splitVersion.pop();
+  const version = splitVersion.join(".");
+  if (!icon.versions.svg.find((el) => el === version)) {
     res.status(404).json({
       error: "version-not-found",
       message: `Version '${req.query.version}' of icon '${icon.name}' not found`,
     });
     return;
   }
-  const { color, size, format = "svg" } = req.query;
+  const { color, size } = req.query;
   let file = await fs.promises.readFile(
     path.resolve(
-      `./public/devicon-git/icons/${icon.name}/${icon.name}-${req.query.version}.svg`
+      `./public/devicon-git/icons/${icon.name}/${icon.name}-${version}.svg`
     )
   );
   if (color || size) {
@@ -58,7 +61,10 @@ export default async function Icon(req: NextApiRequest, res: NextApiResponse) {
         break;
 
       default:
-        res.status(400).json({ error: "Invalid format" });
+        res.status(400).json({
+          error: "invalid-format",
+          message: `Invalid file format '${format}'`,
+        });
         break;
     }
   }
