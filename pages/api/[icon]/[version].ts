@@ -3,8 +3,9 @@ import icons from "devicon/devicon.json";
 import fs from "fs";
 import { ElementCompact, js2xml, xml2js } from "xml-js";
 import sharp from "sharp";
+import path from "path";
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function Icon(req: NextApiRequest, res: NextApiResponse) {
   const icon = icons.find((icon) => icon.name === req.query.icon);
   if (!icon) {
     res.status(404).json({
@@ -22,7 +23,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   }
   const { color, size, format = "svg" } = req.query;
   let file = await fs.promises.readFile(
-    `./node_modules/devicon/icons/${icon.name}/${icon.name}-${req.query.version}.svg`
+    path.resolve(
+      `./public/devicon-git/icons/${icon.name}/${icon.name}-${req.query.version}.svg`
+    )
   );
   if (color || size) {
     const svg: ElementCompact = xml2js(file.toString(), {
