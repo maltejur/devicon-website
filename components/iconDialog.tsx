@@ -54,9 +54,9 @@ export default function IconDialog() {
                 {icon.versions.svg.map((version) => {
                   const url = `${window.location.protocol}//${
                     window.location.host
-                  }/api/${iconName}/${version}${
+                  }/api/${iconName}/${version}.svg${
                     color ? `?color=${encodeURIComponent(color)}` : ""
-                  }.svg`;
+                  }`;
                   return (
                     <a href={url} key={version}>
                       {url}
