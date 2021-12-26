@@ -52,23 +52,24 @@ export default async function Icon(req: NextApiRequest, res: NextApiResponse) {
   // Let vercel cache the icon for a week
   // https://vercel.com/docs/concepts/edge-network/headers#cache-control-header
   res.setHeader("Cache-Control", "s-maxage=604800");
-  res.setHeader("Content-Type", "image/svg+xml");
-  if (format !== "svg") {
-    switch (format) {
-      case "png":
-        res.setHeader("Content-Type", "image/png");
-        file = await sharp(file).png().toBuffer();
-        break;
+  switch (format) {
+    case "svg":
+      res.setHeader("Content-Type", "image/svg+xml");
+      res.send(file);
+      break;
 
-      default:
-        res.status(400).json({
-          error: "invalid-format",
-          message: `Invalid file format '${format}'`,
-        });
-        break;
-    }
+    case "png":
+      res.setHeader("Content-Type", "image/png");
+      res.send(await sharp(file).png().toBuffer());
+      break;
+
+    default:
+      res.status(400).json({
+        error: "invalid-format",
+        message: `Invalid file format '${format}'`,
+      });
+      break;
   }
-  res.send(file);
 }
 
 function walkSvg(
