@@ -5,7 +5,7 @@ import { useAsyncMemo } from "use-async-memo";
 export default function IconPreview({
   iconName,
   iconVersion,
-  color,
+  color
 }: {
   iconName: string;
   iconVersion: string;
@@ -75,6 +75,7 @@ export default function IconPreview({
         .icon :global(svg) {
           width: 100%;
           height: 100%;
+          transition: background 0.1s linear;
         }
       `}</style>
     </div>

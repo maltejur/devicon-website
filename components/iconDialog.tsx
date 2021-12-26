@@ -1,29 +1,31 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   Dialog,
   DialogContent,
   DialogTitle,
   styled,
-  TextField
+  TextField,
+  Typography
 } from "@mui/material";
 import icons from "public/devicon-git/devicon.json";
 import { StringParam, useQueryParam } from "next-query-params";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import IconPreview from "./iconPreview";
 import Title from "./title";
+import ButtonSelect from "./buttonSelect";
+import IconSettings from "./iconSettings";
 
 export default function IconDialog() {
   const [iconName, setIconName] = useQueryParam("icon", StringParam);
-  const [color, setColor] = useState<string>();
-
+  const [iconVersion, setIconVersion] = useState<string>();
   const icon = useMemo(
     () => icons.find((icon) => icon.name === iconName),
     [iconName]
   );
-
-  console.log(icon);
+  const [color, setColor] = useState<string>();
 
   return (
     <Dialog
@@ -38,44 +40,31 @@ export default function IconDialog() {
             <Title variant="h4">{icon.name}</Title>
           </DialogTitle>
           <DialogContent>
-            <Colums>
-              <IconPreview
-                iconName={icon.name}
-                iconVersion={icon.versions.svg[0]}
-                color={color}
-              />
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Box sx={{ display: "flex" }}>
-                  <TextField
-                    label="Color"
-                    value={color || ""}
-                    onChange={(event) => setColor(event.target.value)}
-                  />
-                  <Button onClick={() => setColor(undefined)}>Reset</Button>
-                </Box>
-                <HexColorPicker color={color} onChange={setColor} />
-                {icon.versions.svg.map((version) => {
-                  const url = `${window.location.protocol}//${
-                    window.location.host
-                  }/api/${iconName}/${version}.svg${
-                    color ? `?color=${encodeURIComponent(color)}` : ""
-                  }`;
-                  return (
-                    <a href={url} key={version}>
-                      {url}
-                    </a>
-                  );
-                })}
-              </Box>
-            </Colums>
+            {icon && (
+              <Colums>
+                <IconPreview
+                  iconName={icon.name}
+                  iconVersion={iconVersion}
+                  color={color}
+                />
+                <IconSettings
+                  icon={icon}
+                  iconVersion={iconVersion}
+                  setIconVersion={setIconVersion}
+                  color={color}
+                  setColor={setColor}
+                />
+              </Colums>
+            )}
           </DialogContent>
         </>
       )}
+      <style jsx>{``}</style>
     </Dialog>
   );
 }
 
 const Colums = styled("div")({
   display: "grid",
-  gridTemplateColumns: "220px auto"
+  gridTemplateColumns: "220px calc(100% - 240px)"
 });
