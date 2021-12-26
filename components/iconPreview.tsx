@@ -1,44 +1,82 @@
-import styled from "@emotion/styled";
+import { customizeSvg } from "lib/svg";
+import { useMemo } from "react";
+import { useAsyncMemo } from "use-async-memo";
 
 export default function IconPreview({
   iconName,
   iconVersion,
+  color,
 }: {
   iconName: string;
   iconVersion: string;
+  color: string;
 }) {
+  const originalIcon = useAsyncMemo(
+    () =>
+      fetch(
+        `/devicon-git/icons/${iconName}/${iconName}-${iconVersion}.svg`
+      ).then((res) => res.text()),
+    [iconName, iconVersion]
+  );
+
+  const coloredIcon = useMemo(
+    () =>
+      originalIcon &&
+      (color ? customizeSvg(originalIcon, { color }) : originalIcon),
+    [originalIcon, color]
+  );
+
   return (
     <div>
-      <IconFrame>
-        <Checkerboard src="/checkerboard.png" alt="Checkerboard" />
-        <Icon
-          src={`/api/${iconName}/${iconVersion}.svg`}
-          alt={`${iconName}/${iconVersion} icon`}
+      <div className="iconFrame">
+        <img
+          className="checkerboard"
+          src="/checkerboard.png"
+          alt="Checkerboard"
         />
-      </IconFrame>
+        {coloredIcon ? (
+          <div
+            className="icon"
+            dangerouslySetInnerHTML={{ __html: coloredIcon }}
+          />
+        ) : (
+          // Use already fetched image icon while loading
+          <img
+            className="icon"
+            src={`/api/${iconName}/${iconVersion}.svg`}
+            alt={`${iconName}/${iconVersion} icon`}
+          />
+        )}
+      </div>
+      <style jsx>{`
+        .iconFrame {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          float: left;
+        }
+
+        .checkerboard {
+          width: 100%;
+          height: 100%;
+          image-rendering: pixelated;
+        }
+
+        .icon {
+          position: absolute;
+          top: 5%;
+          left: 5%;
+          right: 5%;
+          bottom: 5%;
+          width: 90%;
+          height: 90%;
+        }
+
+        .icon :global(svg) {
+          width: 100%;
+          height: 100%;
+        }
+      `}</style>
     </div>
   );
 }
-
-const IconFrame = styled("div")({
-  position: "relative",
-  width: "200px",
-  height: "200px",
-  float: "left",
-});
-
-const Checkerboard = styled("img")({
-  width: "100%",
-  height: "100%",
-  imageRendering: "pixelated",
-});
-
-const Icon = styled("img")({
-  position: "absolute",
-  top: "5%",
-  left: "5%",
-  right: "5%",
-  bottom: "5%",
-  width: "90%",
-  height: "90%",
-});

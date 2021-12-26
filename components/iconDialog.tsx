@@ -5,9 +5,9 @@ import {
   DialogContent,
   DialogTitle,
   styled,
-  TextField,
+  TextField
 } from "@mui/material";
-import icons from "devicon/devicon.json";
+import icons from "public/devicon-git/devicon.json";
 import { StringParam, useQueryParam } from "next-query-params";
 import { useMemo, useState } from "react";
 import { HexColorPicker } from "react-colorful";
@@ -22,6 +22,8 @@ export default function IconDialog() {
     () => icons.find((icon) => icon.name === iconName),
     [iconName]
   );
+
+  console.log(icon);
 
   return (
     <Dialog
@@ -40,6 +42,7 @@ export default function IconDialog() {
               <IconPreview
                 iconName={icon.name}
                 iconVersion={icon.versions.svg[0]}
+                color={color}
               />
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Box sx={{ display: "flex" }}>
@@ -74,5 +77,5 @@ export default function IconDialog() {
 
 const Colums = styled("div")({
   display: "grid",
-  gridTemplateColumns: "220px auto",
+  gridTemplateColumns: "220px auto"
 });
