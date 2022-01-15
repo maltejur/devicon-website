@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Card, styled, Typography } from "@mui/material";
 import icons from "public/devicon-git/devicon.json";
 import { Icon } from "lib/types";
 import { StringParam, useQueryParam } from "next-query-params";
@@ -8,7 +8,7 @@ export default function IconGallery() {
   const [searchQuery, setSearchQuery] = useQueryParam("q", StringParam);
 
   return (
-    <Grid>
+    <div className="grid">
       {icons
         .filter(
           (icon: Icon) =>
@@ -19,37 +19,61 @@ export default function IconGallery() {
             )
         )
         .map((icon) => (
-          <IconBox
-            href={`?icon=${icon.name}`}
+          <a
+            className="iconBox"
             key={icon.name}
+            href={`?icon=${icon.name}`}
             onClick={(event) => {
               event.preventDefault();
               setIconName(icon.name);
             }}
           >
-            <img
-              src={`/api/${icon.name}/${icon.versions.svg[0]}.svg`}
-              alt={`${icon.name} ${icon.versions.svg[0]} icon`}
-            />
-            {icon.name}
-          </IconBox>
+            <Card>
+              <img
+                className="iconImage"
+                src={`/api/${icon.name}/${icon.versions.svg[0]}.svg`}
+                alt={`${icon.name} ${icon.versions.svg[0]} icon`}
+              />
+              <Typography
+                className="iconName"
+                color="GrayText"
+                variant="caption"
+              >
+                {icon.name}
+              </Typography>
+            </Card>
+          </a>
         ))}
-    </Grid>
+      <style jsx>{`
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(6, 150px);
+          gap: 30px;
+        }
+
+        .iconBox {
+          text-decoration: none;
+        }
+
+        .iconBox > :global(div) {
+          padding: 30px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .iconBox > :global(div):hover {
+          background-color: rgba(0, 0, 0, 0.04);
+          box-shadow: 3px 5px 0 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .iconImage {
+          margin-bottom: 15px;
+        }
+      `}</style>
+    </div>
   );
 }
-
-const Grid = styled("div")({
-  display: "grid",
-  width: "100%",
-  maxWidth: "1000px",
-  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-  gridGap: "1rem",
-});
-
-const IconBox = styled("a")({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  margin: "20px",
-  maxWidth: "150px",
-});

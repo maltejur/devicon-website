@@ -63,7 +63,7 @@ export default function IconSettings({
           onChange={(newValue) => setIconVersion(newValue)}
         />
       </div>
-      {iconVersion?.startsWith("plain") && (
+      {icon.versions.font.includes(iconVersion) && (
         <>
           <div className="subheading">What color should the icon be?</div>
           <ColorPicker color={color} setColor={setColor} />
