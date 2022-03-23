@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@babel/core': '7'
+  '@emotion/cache': ^11.7.1
   '@emotion/react': ^11.8.2
   '@emotion/server': ^11.4.0
   '@emotion/styled': ^11.8.1
@@ -29,6 +30,7 @@ specifiers:
 
 dependencies:
   '@babel/core': 7.17.8
+  '@emotion/cache': 11.7.1
   '@emotion/react': 11.8.2_5a943fc55a0ff92c0edb94756a5bda3c
   '@emotion/server': 11.4.0
   '@emotion/styled': 11.8.1_4f34f9dcb4a72ea8dc26be56200ba2d2
