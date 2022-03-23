@@ -1,3 +1,4 @@
+import Color from "color";
 import { customizeSvg } from "lib/svg";
 import { useMemo } from "react";
 import { useAsyncMemo } from "use-async-memo";
@@ -5,25 +6,27 @@ import { useAsyncMemo } from "use-async-memo";
 export default function IconPreview({
   iconName,
   iconVersion,
-  color
+  color,
 }: {
   iconName: string;
   iconVersion: string;
-  color: string;
+  color: Color;
 }) {
   const originalIcon = useAsyncMemo(
     () =>
       fetch(
-        `/devicon-git/icons/${iconName}/${iconName}-${iconVersion}.svg`
+        `/devicon-git/icons/${iconName}/${iconName}-${iconVersion}.svg`,
       ).then((res) => res.text()),
-    [iconName, iconVersion]
+    [iconName, iconVersion],
   );
 
   const coloredIcon = useMemo(
     () =>
       originalIcon &&
-      (color ? customizeSvg(originalIcon, { color }) : originalIcon),
-    [originalIcon, color]
+      (color
+        ? customizeSvg(originalIcon, { color: color?.hex() })
+        : originalIcon),
+    [originalIcon, color],
   );
 
   return (

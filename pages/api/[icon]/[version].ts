@@ -28,12 +28,12 @@ export default async function Icon(req: NextApiRequest, res: NextApiResponse) {
   const { color, size } = req.query;
   let file = await fs.promises.readFile(
     path.resolve(
-      `./public/devicon-git/icons/${icon.name}/${icon.name}-${version}.svg`
-    )
+      `./public/devicon-git/icons/${icon.name}/${icon.name}-${version}.svg`,
+    ),
   );
   if (color || size) {
     file = Buffer.from(
-      customizeSvg(file, { color: color?.toString(), size: size?.toString() })
+      customizeSvg(file, { color: color?.toString(), size: size?.toString() }),
     );
   }
   // Let vercel cache the icon for a week

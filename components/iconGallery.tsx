@@ -15,8 +15,8 @@ export default function IconGallery() {
             !searchQuery ||
             icon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             icon.tags.find((tag) =>
-              tag.toLowerCase().includes(searchQuery.toLowerCase())
-            )
+              tag.toLowerCase().includes(searchQuery.toLowerCase()),
+            ),
         )
         .map((icon) => (
           <a
@@ -47,8 +47,10 @@ export default function IconGallery() {
       <style jsx>{`
         .grid {
           display: grid;
-          grid-template-columns: repeat(6, 150px);
+          grid-template-columns: repeat(auto-fill, 150px);
+          width: 100%;
           gap: 30px;
+          justify-content: center;
         }
 
         .iconBox {

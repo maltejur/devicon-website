@@ -2,7 +2,7 @@ import { ElementCompact, js2xml, xml2js } from "xml-js";
 
 export function customizeSvg(
   file: Buffer | string,
-  { color, size }: { color?: string; size?: string }
+  { color, size }: { color?: string; size?: string },
 ) {
   const svg: ElementCompact = xml2js(file.toString(), {
     compact: true,
@@ -25,7 +25,7 @@ export function customizeSvg(
 
 function walkSvg(
   svg: ElementCompact,
-  callback: (element: ElementCompact) => void
+  callback: (element: ElementCompact) => void,
 ) {
   let queue = [svg];
   while (queue.length > 0) {
@@ -35,8 +35,8 @@ function walkSvg(
       Object.entries(element)
         .filter(([key, _]) => !key.startsWith("_"))
         .flatMap(([_, element]) =>
-          element.length !== undefined ? element : [element]
-        )
+          element.length !== undefined ? element : [element],
+        ),
     );
   }
 }

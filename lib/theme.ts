@@ -14,6 +14,10 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  typography: {
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
+  },
   components: {
     MuiButtonBase: {
       styleOverrides: {

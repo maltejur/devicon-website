@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export default function ButtonSelect({
   options,
   value,
-  onChange
+  onChange,
 }: {
   options: Record<string, ReactNode>;
   value: string;
