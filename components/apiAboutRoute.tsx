@@ -16,7 +16,7 @@ export default function ApiAboutRoute({
   children?: ReactNode;
 }) {
   return (
-    <fieldset className="root" id={name.toLowerCase().replace(/ /g, "-")}>
+    <fieldset id={name.toLowerCase().replace(/ /g, "-")}>
       <legend>
         <h3>{name}</h3>
       </legend>
@@ -32,21 +32,6 @@ export default function ApiAboutRoute({
           {example}
         </>
       )}
-      <style jsx>{`
-        h3 {
-          margin: 0 5px;
-        }
-
-        pre {
-          background-color: rgba(0, 0, 0, 0.03);
-          padding: 5px;
-        }
-
-        fieldset {
-          display: block;
-          margin-bottom: 20px;
-        }
-      `}</style>
     </fieldset>
   );
 }
@@ -71,24 +56,6 @@ function ParamsTable({
           </tr>
         ))}
       </table>
-      <style jsx global>{`
-        h4 {
-          margin-bottom: 0;
-        }
-
-        table {
-          margin-left: 10px;
-        }
-
-        td {
-          min-width: 60px;
-        }
-
-        fieldset {
-          display: block;
-          margin-bottom: 20px;
-        }
-      `}</style>
     </>
   );
 }

@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+/* eslint-disable @next/next/no-css-tags */
 import ApiAboutRoute from "components/apiAboutRoute";
-import Link from "next/link";
 import DeviconOriginalIcon from "react-devicons/devicon/original";
 
 export default function ApiAbout() {
@@ -53,8 +54,8 @@ export default function ApiAbout() {
         }
       >
         The main API route, it will serve you the icon you specify via a cached
-        CDN. You can browse all the icons <Link href="/">on the website</Link>{" "}
-        or <a href="#icon-list">list them programmatically</a>.
+        CDN. You can browse all the icons <a href="/">on the website</a> or{" "}
+        <a href="#icon-list">list them programmatically</a>.
       </ApiAboutRoute>
       <ApiAboutRoute
         name="Icon Information"
@@ -113,25 +114,7 @@ export default function ApiAbout() {
 }[]`}
         </pre>
       </ApiAboutRoute>
-      <style jsx>{`
-        .title :global(svg) {
-          margin-right: 0.5em;
-          transform: translateY(0.2em);
-        }
-
-        .root {
-          display: flex;
-          flex-direction: column;
-          max-width: 1000px;
-          margin: 10px auto;
-        }
-
-        code {
-          background-color: rgba(0, 0, 0, 0.03);
-          padding: 2px 5px;
-          font-size: 0.9em;
-        }
-      `}</style>
+      <link rel="stylesheet" href="/apiabout.css" />
     </div>
   );
 }
