@@ -1,23 +1,12 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  styled,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Dialog, DialogContent, IconButton } from "@mui/material";
 import icons from "public/devicon-git/devicon.json";
 import { StringParam, useQueryParam } from "next-query-params";
-import { useEffect, useMemo, useState } from "react";
-import { HexColorPicker } from "react-colorful";
+import { useMemo, useState } from "react";
 import IconPreview from "./iconPreview";
 import Title from "./title";
-import ButtonSelect from "./buttonSelect";
 import IconSettings from "./iconSettings";
 import Color from "color";
+import { Close } from "@mui/icons-material";
 
 export default function IconDialog() {
   const [iconName, setIconName] = useQueryParam("icon", StringParam);
@@ -40,9 +29,14 @@ export default function IconDialog() {
           <Title variant="h4" style={{ marginTop: 15 }}>
             {icon.name}
           </Title>
+          <div className="closeButton">
+            <IconButton color="primary" onClick={() => setIconName(undefined)}>
+              <Close />
+            </IconButton>
+          </div>
           <DialogContent>
             {icon && (
-              <Colums>
+              <div className="columns">
                 <IconPreview
                   iconName={icon.name}
                   iconVersion={iconVersion}
@@ -55,17 +49,31 @@ export default function IconDialog() {
                   color={color}
                   setColor={setColor}
                 />
-              </Colums>
+              </div>
             )}
           </DialogContent>
         </>
       )}
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .columns {
+          display: grid;
+          grid-template-columns: 220px auto;
+        }
+
+        @media (max-width: 700px) {
+          .columns {
+            grid-template-columns: 100%;
+            justify-items: center;
+            gap: 30px;
+          }
+        }
+
+        .closeButton {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+        }
+      `}</style>
     </Dialog>
   );
 }
-
-const Colums = styled("div")({
-  display: "grid",
-  gridTemplateColumns: "220px calc(100% - 240px)",
-});

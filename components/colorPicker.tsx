@@ -30,10 +30,6 @@ export default function ColorPicker({
 
   return (
     <div className="root">
-      <HexColorPicker
-        color={color?.hex()}
-        onChange={(newColor) => setColor(new Color(newColor))}
-      />
       <TextField
         label="HEX-Code"
         inputRef={hexRef}
@@ -59,6 +55,10 @@ export default function ColorPicker({
               }
             : {}
         }
+      />
+      <HexColorPicker
+        color={color?.hex()}
+        onChange={(newColor) => setColor(new Color(newColor))}
       />
       <div className="row">
         <TextField
@@ -99,7 +99,7 @@ export default function ColorPicker({
       <style jsx>{`
         .root {
           display: grid;
-          grid-template-columns: auto 200px;
+          grid-template-columns: 200px auto;
           gap: 20px;
           margin-top: 10px;
         }
@@ -109,13 +109,23 @@ export default function ColorPicker({
           width: 200px;
           grid-row-start: 1;
           grid-row-end: 3;
-          grid-column: 2;
         }
 
         .row {
           display: flex;
           align-items: flex-start;
           gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+          .root {
+            grid-template-columns: auto;
+          }
+
+          .root :global(.react-colorful) {
+            height: 150px;
+            width: auto;
+          }
         }
       `}</style>
     </div>

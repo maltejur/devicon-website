@@ -50,7 +50,7 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: "#fdfdfd",
+          backgroundColor: "#fcfcfc",
           boxShadow: "3px 5px 0 0 rgba(0, 0, 0, 0.05)",
         },
         rounded: {

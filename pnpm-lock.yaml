@@ -10,6 +10,7 @@ specifiers:
   '@mui/material': ^5.5.2
   '@types/color': ^3.0.3
   '@types/react': ^17.0.42
+  '@types/react-dom': ^17.0.14
   '@types/sharp': ^0.30.0
   color: ^4.2.1
   devicon: ^2.15.1
@@ -52,6 +53,7 @@ dependencies:
 devDependencies:
   '@types/color': 3.0.3
   '@types/react': 17.0.42
+  '@types/react-dom': 17.0.14
   '@types/sharp': 0.30.0
   eslint: 8.11.0
   eslint-config-next: 12.1.0_3ac81353fe98918efb885c3e6be622c2
@@ -808,6 +810,12 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+
+  /@types/react-dom/17.0.14:
+    resolution: {integrity: sha512-H03xwEP1oXmSfl3iobtmQ/2dHF5aBHr8aUMwyGZya6OW45G+xtdzmq6HkncefiBt5JU8DVyaWl/nWZbjZCnzAQ==}
+    dependencies:
+      '@types/react': 17.0.42
+    dev: true
 
   /@types/react-is/17.0.3:
     resolution: {integrity: sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==}

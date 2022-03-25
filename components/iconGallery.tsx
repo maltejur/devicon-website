@@ -1,7 +1,8 @@
-import { Card, styled, Typography } from "@mui/material";
+import { Card, IconButton, styled, Typography } from "@mui/material";
 import icons from "public/devicon-git/devicon.json";
 import { Icon } from "lib/types";
 import { StringParam, useQueryParam } from "next-query-params";
+import { ContentCopy } from "@mui/icons-material";
 
 export default function IconGallery() {
   const [iconName, setIconName] = useQueryParam("icon", StringParam);
@@ -27,6 +28,7 @@ export default function IconGallery() {
               event.preventDefault();
               setIconName(icon.name);
             }}
+            draggable={false}
           >
             <Card>
               <img

@@ -78,28 +78,30 @@ export default function IconSettings({
       {icon.versions.font.includes(iconVersion) && (
         <div className="section">
           <Question>What color should the icon be</Question>
-          <RadioGroup
-            row
-            value={color ? "custom" : "original"}
-            onChange={(event) =>
-              setColor(
-                event.target.value === "original"
-                  ? undefined
-                  : new Color(icon.color),
-              )
-            }
-          >
-            <FormControlLabel
-              value="original"
-              control={<Radio />}
-              label="Original"
-            />
-            <FormControlLabel
-              value="custom"
-              control={<Radio />}
-              label="Custom"
-            />
-          </RadioGroup>
+          <FormControl>
+            <RadioGroup
+              row
+              value={color ? "custom" : "original"}
+              onChange={(event) =>
+                setColor(
+                  event.target.value === "original"
+                    ? undefined
+                    : new Color(icon.color),
+                )
+              }
+            >
+              <FormControlLabel
+                value="original"
+                control={<Radio />}
+                label="Original"
+              />
+              <FormControlLabel
+                value="custom"
+                control={<Radio />}
+                label="Custom"
+              />
+            </RadioGroup>
+          </FormControl>
           {color && <ColorPicker color={color} setColor={setColor} />}
         </div>
       )}
@@ -229,7 +231,7 @@ export default function IconSettings({
         }
 
         .section {
-          margin-bottom: 20px;
+          margin-bottom: 40px;
         }
 
         .versionSelect :global(.MuiButton-root) {

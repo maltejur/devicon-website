@@ -1,5 +1,13 @@
 import { Search } from "@mui/icons-material";
-import { Box, Button, styled, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  styled,
+  TextField,
+  Typography,
+} from "@mui/material";
 import IconGallery from "components/iconGallery";
 import DeviconOriginalIcon from "react-devicons/devicon/original";
 import deviconPackage from "devicon/package.json";
@@ -14,38 +22,42 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useQueryParam("q", StringParam);
 
   return (
-    <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Title variant="h2" sx={{ mt: 10, mb: 4 }}>
-        <DeviconOriginalIcon
-          style={{
-            transform: "translateY(0.5rem)",
-            marginRight: "0.5rem",
-          }}
-        />
-        Devicon <small>v{deviconPackage.version}</small>
-      </Title>
-      <Typography sx={{ maxWidth: 400, mb: 2 }}>
-        Devicon is a set of icons representing programming languages, designing
-        & development tools. You can use it as a font or directly copy/paste the
-        svg code into your project.
-      </Typography>
-      <div className="buttons">
-        <Button
-          variant="contained"
-          startIcon={<GithubIcon color="white" />}
-          href="https://github.com/devicons/devicon"
-        >
-          GitHub
-        </Button>
-        <Button
-          variant="contained"
-          startIcon={<DiscordIcon color="white" />}
-          href="https://discord.gg/hScy8KWACQ"
-        >
-          Discord
-        </Button>
+    <div className="root">
+      <div className="titleCard">
+        <Card>
+          <CardContent>
+            <Title variant="h2">
+              <DeviconOriginalIcon
+                style={{
+                  transform: "translateY(0.5rem)",
+                  marginRight: "0.5rem",
+                }}
+              />
+              Devicon <small>v{deviconPackage.version}</small>
+            </Title>
+            <Typography>
+              Devicon is a set of icons representing programming languages,
+              designing & development tools. You can use it as a font or
+              directly copy/paste the svg code into your project.
+            </Typography>
+            <div className="buttons">
+              <Button
+                variant="contained"
+                startIcon={<GithubIcon color="white" />}
+                href="https://github.com/devicons/devicon"
+              >
+                GitHub
+              </Button>
+              <Button
+                variant="contained"
+                startIcon={<DiscordIcon color="white" />}
+                href="https://discord.gg/hScy8KWACQ"
+              >
+                Discord
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
       <Box sx={{ display: "flex", alignItems: "flex-end", mb: 3 }}>
         <Search sx={{ mr: 1 }} />
@@ -60,16 +72,32 @@ export default function Home() {
       <IconDialog />
       <Footer />
       <style jsx>{`
+        .root {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .titleCard {
+          margin: 50px 0;
+          max-width: 500px;
+        }
+
+        .titleCard :global(h2) {
+          margin: 20px 0;
+        }
+
         .buttons {
           display: flex;
           gap: 10px;
-          margin-bottom: 30px;
+          justify-content: center;
+          margin-top: 20px;
         }
 
         small {
           font-size: 2rem;
         }
       `}</style>
-    </Box>
+    </div>
   );
 }
